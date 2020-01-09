@@ -6,15 +6,15 @@ def lambda_handler(event, context):
     #yesterday = today - timedelta(days = 1)
     timestampstr=str(today)
     conn = psycopg2.connect(
-        dbname="test",
-        host="redshift-cluster-1.cr6edp7i6rte.ap-south-1.redshift.amazonaws.com",
+        dbname="",
+        host="",
         port= 5439,
         user=" ",
         password=" ")
     cursor = conn.cursor()
-    input_dir= 's3://test1997/copy_test/' + timestampstr + '/'
+    input_dir= 's3://bucket_name/directory/' + timestampstr + '/'
     input1=str(input_dir)
-    query = "copy mock.MOCK_DATA1 From %s credentials 'aws_iam_role=arn:aws:iam::052690760837:role/myRedshiftRole' delimiter ',' ignoreheader 1;"
+    query = "copy mock.MOCK_DATA1 From %s credentials 'aws_iam_role= ' delimiter ',' ignoreheader 1;"
     vars = input1
     print(query)
     cursor.execute(query, (vars,))
